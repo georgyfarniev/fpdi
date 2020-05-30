@@ -16,6 +16,9 @@
     "injection",
     "typescript"
   ],
+  "files": [
+    "dist"
+  ],
   "author": "Georgy Farniev",
   "license": "ISC",
   "devDependencies": {
