@@ -1,29 +1,46 @@
-export type FPDIKey = Symbol | string
-
+/**
+ * FPDI container.
+ */
 export class Container {
   constructor(private strict = true) {}
 
-  private readonly store = new Map<FPDIKey, any>()
+  private readonly store = new Map<string|Symbol, any>()
 
+  /** @returns count of currently provided depedencies */
   public get count() {
     return this.store.size
   }
 
-  public provide(key: FPDIKey, dep: unknown) {
+  /**
+   * @param {string|Symbol} key Dependency key
+   * @param {*} dep Dependency itself
+   * @throws Error if dependency with same key already present
+   */
+  public provide(key: string|Symbol, dep: unknown) {
     if (this.strict && this.store.has(key)) {
       throw new Error(`Key ${key} already exists in FPDI container`)
     }
     this.store.set(key, dep)
   }
 
+  /** Remove all stored dependencies from container */
   public clear() {
     this.store.clear()
   }
 
-  public remove(key: FPDIKey) {
+  /**
+   * Removes dependency by key
+   * @param {string|Symbol} key Dependency key
+   */
+  public remove(key: string|Symbol) {
     this.store.delete(key)
   }
 
+  /**
+   * @param {(string|Symbol)[]} deps Dependencies to inject
+   * @returns Array of dependencies requested if found
+   * @throws Error if one or more of dependencies are missing
+   */
   public inject<
     T0,
     T1 = unknown,
