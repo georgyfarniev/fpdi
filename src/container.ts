@@ -1,14 +1,19 @@
 export type FPDIKey = Symbol | string
 
 export class Container {
+  constructor(private strict = true) {}
+
   private readonly store = new Map<FPDIKey, any>()
 
   public get count() {
     return this.store.size
   }
 
-  public provide(name: FPDIKey, dep: unknown) {
-    this.store.set(name, dep)
+  public provide(key: FPDIKey, dep: unknown) {
+    if (this.strict && this.store.has(key)) {
+      throw new Error(`Key ${key} already exists in FPDI container`)
+    }
+    this.store.set(key, dep)
   }
 
   public clear() {
@@ -55,6 +60,15 @@ export class Container {
       T14,
       T15
     ] {
-    return deps.map((a) => this.store.get(a)) as any
+    return deps.map(
+      (key) => {
+        if (this.strict && !this.store.has(key)) {
+          throw new Error(
+            `Key ${key.toString()} does not exists in FPDI container`
+          )
+        }
+        return this.store.get(key)
+      }
+    ) as any
   }
 }

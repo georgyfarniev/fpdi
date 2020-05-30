@@ -83,9 +83,36 @@ describe('Container', () => {
     expect(container.count).toEqual(0)
   })
 
-  test('clear', () => {})
+  test('clear', () => {
+    const container = new Container()
+
+    container.provide('key1', 'value1')
+    container.provide('key2', 'value2')
+
+    expect(container.count).toEqual(2)
+    container.clear()
+    expect(container.count).toEqual(0)
+  })
 
   test('inject non-existing entity (assertion)', () => {
+    const container = new Container()
+
+    container.provide('key1', 'value1')
+    container.provide('key2', 'value2')
+
+    expect(
+      () => container.inject('nonexisting')
+    ).toThrowError(`Key nonexisting does not exists in FPDI container`)
+  })
+
+  test('trying to override dep with same key', () => {
+    const container = new Container()
+
+    container.provide('key1', 'value1')
+
+    expect(
+      () => container.provide('key1', 'value2')
+    ).toThrowError(`Key key1 already exists in FPDI container`)
   })
 })
 
