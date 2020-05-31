@@ -1,6 +1,6 @@
 {
   "name": "fpdi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Minimalistic dependency injection module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -19,6 +19,10 @@
   "files": [
     "dist"
   ],
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/georgyfarniev/fpdi"
+  },
   "author": "Georgy Farniev",
   "license": "ISC",
   "devDependencies": {
