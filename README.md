@@ -1,5 +1,9 @@
 # FPDI - minimalistic dependency injection module
 
+<a href="https://www.npmjs.com/package/fpdi" alt="Downloads">
+  <img src="https://img.shields.io/npm/dm/fpdi" />
+</a>
+
 **Mission: build convenient and lightweight dependency injection library.**
 
 Why FPDI?
