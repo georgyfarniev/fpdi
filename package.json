@@ -14,7 +14,8 @@
     "di",
     "dependency",
     "injection",
-    "typescript"
+    "typescript",
+    "ioc"
   ],
   "files": [
     "dist"
