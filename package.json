@@ -35,8 +35,5 @@
     "@babel/preset-env": "^7.10.4",
     "jest": "^26.1.0"
   },
-  "dependencies": {
-    "@types/mongoose": "^5.7.32",
-    "mongoose": "^5.9.25"
-  }
+  "dependencies": {}
 }
