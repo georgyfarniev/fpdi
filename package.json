@@ -18,7 +18,7 @@
     "ioc"
   ],
   "files": [
-    "dist/*/**"
+    "dist/**/*.js"
   ],
   "repository": {
     "type": "git",
