@@ -2,6 +2,35 @@ import 'jest'
 import { Container } from '../src'
 
 describe('Container', () => {
+  test('assert on missing key', () => {
+
+    const container = new Container()
+    const expectedError = 'Key unknownkey does not exists in FPDI container'
+
+    expect(() => container.injectOne('unknownkey')).toThrowError(expectedError)
+    expect(() => container.inject('unknownkey')).toThrowError(expectedError)
+  })
+
+  test('injectOne', () => {
+    const key1 = 'dep1'
+    const key2 = 'dep2'
+
+    const value1 = 'foo'
+    const value2 = 42
+
+    const container = new Container()
+
+    container.provide(key1, value1)
+    container.provide(key2, value2)
+
+    const ret1 = container.injectOne<string>(key1)
+    const ret2 = container.injectOne<number>(key2)
+
+    expect(ret1).not.toEqual(ret2)
+    expect(ret1).toEqual(value1)
+    expect(ret2).toEqual(value2)
+  })
+
   test('provide and inject single', () => {
     const key1 = 'dep1'
     const key2 = 'dep2'

@@ -37,7 +37,18 @@ export class Container {
   }
 
   /**
-   * @param {(string|Symbol)[]} deps Dependencies to inject
+   * Inject single dependency. Returns dep itself instead of tuple.
+   * @param {string|symbol} key Dependency key
+   */
+  public injectOne = <T>(key: string|symbol): T => {
+    if (this.strict && !this.store.has(key))
+      throw new Error(`Key ${key.toString()} does not exists in FPDI container`)
+
+    return this.store.get(key)
+  }
+
+  /**
+   * @param {(string|symbol)[]} deps Dependencies to inject
    * @returns Array of dependencies requested if found
    * @throws Error if one or more of dependencies are missing
    */
@@ -77,15 +88,6 @@ export class Container {
       T14,
       T15
     ] {
-    return deps.map(
-      (key) => {
-        if (this.strict && !this.store.has(key)) {
-          throw new Error(
-            `Key ${key.toString()} does not exists in FPDI container`
-          )
-        }
-        return this.store.get(key)
-      }
-    ) as any
+    return deps.map(this.injectOne) as any
   }
 }
