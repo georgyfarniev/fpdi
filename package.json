@@ -1,6 +1,6 @@
 {
   "name": "fpdi",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Minimalistic dependency injection module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
